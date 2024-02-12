@@ -94,7 +94,7 @@ class TicTacToeDQL():
 
         self.env.close()
 
-        torch.save(policy_dqn.state_dict(), f"{self.name}.pt")
+        torch.save(policy_dqn.state_dict(), f"network_params/{self.name}.pt")
         plt.figure(1)
 
         # average rewards vs episodes
@@ -110,7 +110,7 @@ class TicTacToeDQL():
         plt.plot(epsilon_history)
         
         # Save plots
-        plt.savefig(f'{self.name}.png')
+        plt.savefig(f'plots/{self.name}.png')
         plt.close()
 
     def optimize(self, agent : DQNAgent, batch):
@@ -160,5 +160,5 @@ if __name__ == '__main__':
     #             t2 = time.time()
     #             durations[(bs, memory)] = np.round(t2 - t1, 3)
     # print(durations)
-    ttt = TicTacToeDQL(batch_size = 15, sync = 4, name = 'batchsize100.sync4.memoryNone')
+    ttt = TicTacToeDQL(batch_size = 100, sync = 20, name = 'batchsize100.sync20.memoryNone')
     ttt.train(10000)
