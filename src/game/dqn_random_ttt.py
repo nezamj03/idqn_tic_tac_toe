@@ -36,11 +36,11 @@ class TicTacToeDQNRandom:
         self.agents = tuple(self.env.agents)
 
         if player_dqn == 'x':
-            self.agent_dqn.id = self.env.agents[0]
-            self.agent_random.id = self.env.agents[1]
+            self.agent_dqn.id(self.env.agents[0])
+            self.agent_random.id(self.env.agents[1])
         else:
-            self.agent_dqn.id = self.env.agents[1]
-            self.agent_random.id = self.env.agents[0]
+            self.agent_dqn.id(self.env.agents[1])
+            self.agent_random.id(self.env.agents[0])
 
     def train(self, episodes: int) -> tuple[dict, np.array]:
         """
@@ -69,7 +69,7 @@ class TicTacToeDQNRandom:
                 input_tensor = state_to_input(state)
 
                 # DQN Agent's turn
-                if self.agent_dqn.id == agent_id: 
+                if self.agent_dqn._id == agent_id: 
                     ps, pa = prev_sa
                     if ps is not None and pa is not None:
                         self.agent_dqn.step(ps, pa, reward, input_tensor, done, self.gamma, self.tau)
@@ -99,7 +99,7 @@ class TicTacToeDQNRandom:
 if __name__ == '__main__':
     gamma = 1
     tau = 1
-    decay = 0.00001
+    decay = 0.0000015
     states = 18
     actions = 9
     seed = 42

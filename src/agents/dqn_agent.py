@@ -15,6 +15,7 @@ class DQNAgent(Agent):
                  seed=42,
                  sync=5,
                  alpha = 0.001,
+                 batch_size=32
                  ):
         """
         initialize a DQNAgent with the given settings.
@@ -32,7 +33,7 @@ class DQNAgent(Agent):
         self.optimizer = optim.Adam(self.qnetwork_policy.parameters(), lr=alpha) # hardcoded adam
 
         # replay buffer
-        self.memory = ReplayBuffer(action_size, buffer_size=1000, batch_size=64, seed=seed)
+        self.memory = ReplayBuffer(action_size, buffer_size=1000, batch_size=batch_size, seed=seed)
         self.timestep = 0
         self.sync = sync
 

@@ -44,13 +44,16 @@ def save_results(agents, reward_history, epsilon_history, plot_name, width=100):
 
     # Illegal action %
     f_illegal = lambda arr: np.sum(arr != 0, axis=-1) / np.shape(arr)[-1]
-    illegal_percent = rolling(np.array(list(map(sum, zip(*reward_history.values())))),
-                              f_illegal,
-                              width)
+    indices = np.array(list(map(sum, zip(*reward_history.values())))) != 0
+    illegal_percent = {agent_id : rolling(rh * indices, f_illegal, width)
+                       for agent_id, rh in reward_history.items()}
     
     plt.subplot(222)
-    plt.plot(illegal_percent)
-    plt.title(f'rolling {width} % illegal action')
+    for agent_id, rew in illegal_percent.items():
+        plt.plot(rew, label=agents[agent_id])
+    plt.legend()
+    plt.ylim(0, 1)
+    plt.title(f'rolling width {width} % illegal action')
 
     # Win rate
     f_winrate = lambda arr: np.sum(arr == 1, axis=-1) / np.shape(arr)[-1]
@@ -115,3 +118,28 @@ def ascii_state(state: torch.tensor):
                     board[i][j] = 'o '
 
     return np.array(board, dtype=str)
+
+def find_convergence_point(arr, tolerance=0.05):
+    """
+    Finds the first index in an array where the absolute differences between subsequent elements
+    converge within a specified tolerance and continue to do so for all subsequent elements.
+
+    Parameters:
+    - arr (array-like): The input array to check for convergence. Expected to be a NumPy array or a list.
+    - tolerance (float, optional): The tolerance within which the absolute differences between
+      subsequent elements must fall to consider them as converging. Defaults to 0.05.
+
+    Returns:
+    - int: The index of the first element in the array where convergence within the specified tolerance
+      is achieved and sustained for all subsequent elements. Returns -1 if no such convergence point is found.
+
+    """
+    import numpy as np
+
+    diffs = np.abs(np.diff(arr))
+    within_tolerance = diffs <= tolerance
+    all_subsequent_within_tol = np.cumprod(within_tolerance[::-1])[::-1]
+    first_converge_index = np.argmax(all_subsequent_within_tol)
+    if all_subsequent_within_tol[first_converge_index] == 1:
+        return first_converge_index
+    return -1
