@@ -1,11 +1,11 @@
 import random
 import numpy as np
 
-from ..agent import Agent
+from .agent import Agent
 
 class RandomAgent(Agent):
-    def __init__(self, state_size, action_size, seed=42):
-        super().__init__(state_size, action_size, seed=seed)
+    def __init__(self, seed=42):
+        super().__init__(seed=seed)
     
     def act(self, state, action_mask, **kwargs):
         """
@@ -18,5 +18,5 @@ class RandomAgent(Agent):
         Returns:
         - int: A randomly selected valid action.
         """
-        possible_actions = np.where(action_mask == 1)[0]
+        possible_actions = np.flatnonzero(action_mask == 1)
         return random.choice(possible_actions)
