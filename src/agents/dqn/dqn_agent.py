@@ -3,9 +3,9 @@ import numpy as np
 import torch
 import torch.optim as optim
 
-from ..network.q_network import QNetwork
-from ..buffer.replay_buffer import ReplayBuffer
-from .agent import Agent
+from ...network.q_network import QNetwork
+from ...buffer.replay_buffer import ReplayBuffer
+from ..agent import Agent
 
 class DQNAgent(Agent):
     def __init__(self, 

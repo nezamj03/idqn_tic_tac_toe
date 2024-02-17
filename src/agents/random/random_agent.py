@@ -1,7 +1,7 @@
 import random
 import numpy as np
 
-from ..agents.agent import Agent
+from ..agent import Agent
 
 class RandomAgent(Agent):
     def __init__(self, state_size, action_size, seed=42):

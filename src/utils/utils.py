@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import torch
 
-from ..agents.dqn_agent import DQNAgent
+from ..agents.dqn.dqn_agent import DQNAgent
 
 def rolling(arr, f, width=100):
     """

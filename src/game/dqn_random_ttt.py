@@ -1,8 +1,8 @@
 import numpy as np
 from pettingzoo.classic import tictactoe_v3
 
-from ..agents.dqn_agent import DQNAgent
-from ..agents.random_agent import RandomAgent
+from ..agents.dqn.dqn_agent import DQNAgent
+from ..agents.random.random_agent import RandomAgent
 from ..utils.utils import *
 
 class TicTacToeDQNRandom:

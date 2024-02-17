@@ -2,7 +2,7 @@ import numpy as np
 from pettingzoo.classic import tictactoe_v3
 
 from ..eval.eps_decay import ExponentialDecay, LinearDecay
-from ..agents.dqn_agent import DQNAgent
+from ..agents.dqn.dqn_agent import DQNAgent
 from ..utils.utils import *
 
 class TicTacToeDQNDQN:

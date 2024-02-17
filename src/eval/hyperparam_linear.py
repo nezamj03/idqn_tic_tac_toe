@@ -4,7 +4,7 @@ import pandas as pd
 
 from ..utils.utils import find_convergence_point
 from .eps_decay import LinearDecay
-from ..agents.dqn_agent import DQNAgent
+from ..agents.dqn.dqn_agent import DQNAgent
 from ..game.dqn_dqn_ttt import TicTacToeDQNDQN
     
 if __name__ == "__main__":
