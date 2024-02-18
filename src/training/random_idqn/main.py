@@ -1,11 +1,11 @@
 import numpy as np
 import torch
 import random
-from typing import Dict, Optional
+from typing import Tuple, Dict, Optional
 
 from ...dqn.agents.idqn import IDQNAgent
 from ...agents.random import RandomAgent
-from typing import List, Tuple, Dict
+from typing import Tuple, Dict
 from ...utils.epsilon_decay import ExponentialDecay
 
 class IDQNRandomEnvironment:
@@ -46,7 +46,7 @@ class IDQNRandomEnvironment:
             agent.id(agnt_id)
             self.agents[agnt_id] = agent
 
-    def train(self, episodes: int) -> Dict[str, np.array]:
+    def train(self, episodes: int) -> Tuple[Dict[str, np.array], np.array]:
         """
         Trains the IDQN and random agents for a specified number of episodes.
 
