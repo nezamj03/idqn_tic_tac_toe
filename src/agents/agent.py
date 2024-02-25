@@ -23,13 +23,3 @@ class Agent:
         - int: a selected valid action.
         """
         raise NotImplementedError()
-
-    def id(self, id):
-        """
-        Sets this agent's ID in a game
-
-        Parameters:
-        - id (str): agent id for games
-        """
-        self._id = id
-        
