@@ -10,7 +10,7 @@ from ....utils.epsilon_decay import ExponentialDecay, LinearDecay
 from ....utils.utils import save_results
 from ....dqn.agents.idqn import IDQNAgent
 
-class TicTacToeIDQNEnvironment:
+class ConnectFourIDQNEnvironment:
     """
     An environment class for Independent Deep Q-Network (IDQN) training.
 
@@ -112,7 +112,7 @@ def main():
     episodes = 10000
     decay = LinearDecay(episodes)
 
-    sim = TicTacToeIDQNEnvironment(generator, idqn_agents, gamma, tau, decay, seed)
+    sim = ConnectFourIDQNEnvironment(generator, idqn_agents, gamma, tau, decay, seed)
     rh, eh = sim.train(episodes)
 
     path  = f'{Path(__file__).resolve().parent.parent}/res/figures'
